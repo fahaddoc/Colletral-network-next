@@ -2,19 +2,24 @@ import React, { useState } from 'react';
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement } from 'chart.js';
 import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
 Chart.register(ArcElement);
 
 const LandingPage = () => {
 
+    const isSmallScreen = useMediaQuery({ query: '(max-width:991.98px)' });
     const [init, setInit] = useState({
         slideOne: true,
         slideTwo: false,
+        slideThree: false,
+        slideFour: false,
         headOne: true,
         headTwo: false,
         headThree: false,
     });
 
-    let { slideOne, slideTwo, headOne, headTwo, headThree } = init;
+
+    let { slideOne, slideTwo, slideThree, slideFour, headOne, headTwo, headThree } = init;
 
     const labels = [
         'Presale',
@@ -91,26 +96,75 @@ const LandingPage = () => {
     }
 
     const handleSlider = (type) => {
-        if (type === 1) {
-            setInit({
-                ...init,
-                slideOne: true,
-                slideTwo: false
-            });
-            let a = document.getElementById('collateral-slider');
-            a.style.transform = "translate3d(-0px, 0px, 0px)";
 
+        if (isSmallScreen) {
+            if (type === 1) {
+                setInit({
+                    ...init,
+                    slideOne: true,
+                    slideTwo: false,
+                    slideThree: false,
+                    slideFour: false,
+                });
+                let a = document.getElementById('collateral-slider');
+                a.style.transform = "translate3d(-0px, 0px, 0px)";
+
+            }
+            if (type === 2) {
+                setInit({
+                    ...init,
+                    slideOne: false,
+                    slideTwo: true,
+                    slideThree: false,
+                    slideFour: false,
+                });
+                let a = document.getElementById('collateral-slider');
+                a.style.transform = "translate3d(-300px, 0px, 0px)";
+            }
+            if (type === 3) {
+                setInit({
+                    ...init,
+                    slideOne: false,
+                    slideTwo: false,
+                    slideThree: true,
+                    slideFour: false,
+                });
+                let a = document.getElementById('collateral-slider');
+                a.style.transform = "translate3d(-600px, 0px, 0px)";
+            }
+            if (type === 4) {
+                setInit({
+                    ...init,
+                    slideOne: false,
+                    slideTwo: false,
+                    slideThree: false,
+                    slideFour: true,
+                });
+                let a = document.getElementById('collateral-slider');
+                a.style.transform = "translate3d(-900px, 0px, 0px)";
+            }
         }
-        if (type === 2) {
-            setInit({
-                ...init,
-                slideOne: false,
-                slideTwo: true
-            });
-            let a = document.getElementById('collateral-slider');
-            a.style.transform = "translate3d(-885px, 0px, 0px)";
 
+        if (!isSmallScreen) {
+            if (type === 1) {
+                setInit({
+                    ...init,
+                    slideOne: true,
+                    slideTwo: false
+                });
+                let a = document.getElementById('collateral-slider');
+                a.style.transform = "translate3d(-0px, 0px, 0px)";
 
+            }
+            if (type === 2) {
+                setInit({
+                    ...init,
+                    slideOne: false,
+                    slideTwo: true
+                });
+                let a = document.getElementById('collateral-slider');
+                a.style.transform = "translate3d(-885px, 0px, 0px)";
+            }
         }
     }
 
@@ -294,10 +348,10 @@ const LandingPage = () => {
                             <div class="collateral-slider__controls">
                                 <button style={{ display: 'flex' }} onClick={() => handleSlider(1)} className={`${slideOne && "tns-nav-active"}`}></button>
                                 <button style={{ display: 'flex' }} onClick={() => handleSlider(2)} className={`${slideTwo && "tns-nav-active"}`}></button>
-                                <button style={{ display: 'none' }}></button>
-                                <button style={{ display: 'none' }}></button>
-                                <button style={{ display: 'none' }}></button>
-                                <button style={{ display: 'none' }}></button>
+                                <button style={{ display: 'none' }} onClick={() => handleSlider(3)} className={`${slideThree && "tns-nav-active"}`}></button>
+                                <button style={{ display: 'none' }} onClick={() => handleSlider(4)} className={`${slideFour && "tns-nav-active"}`}></button>
+                                {/* <button style={{ display: 'none' }}></button>
+                                <button style={{ display: 'none' }}></button> */}
                             </div>
                         </div>
                         <div class="col-lg-7">
@@ -993,7 +1047,7 @@ const LandingPage = () => {
                                                 <h4 class="accordion-header" id="headingTwo" onClick={() => {
                                                     handleAccordion(2)
                                                 }}>
-                                                    <button class={`accordion-button ${!headTwo && "collapsed"}`} type="button"
+                                                    <button class={`accordion-button  ${!headTwo && "collapsed"}`} type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                         aria-expanded={headTwo} aria-controls="collapseTwo">
                                                         Accordion Item #2

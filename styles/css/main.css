@@ -4178,6 +4178,7 @@ textarea.form-control-lg {
 
 .collapse:not(.show) {
 	display: none;
+	
 }
 
 .collapsing {
@@ -22730,6 +22731,13 @@ h6 .highlight:before, .h6 .highlight:before {
 	background: #fff;
 	margin-right: 12px;
 }
+
+@media (max-width: 991.98px) {
+	.collateral-slider__controls button {
+		display: flex !important;
+	}
+}
+
 .collateral-slider__controls button.tns-nav-active {
 	background: #A03CAB;
 }
